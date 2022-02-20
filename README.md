@@ -1,4 +1,5 @@
 This was tested on the unpatched European version of the game.
+
 Exe file size: 925 696 bytes
 
 This program requires at least .Net Framework 2.0 to run.
