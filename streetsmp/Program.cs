@@ -147,10 +147,9 @@ namespace streetsmp
         byte[] CalculateCheckpoint(int check)
         {
             int player_max = BitConverter.ToInt32(mem.ReadByte(PLAYER_CP_MAX, 4), 0);
-            int net_max = BitConverter.ToInt32(mem.ReadByte(NET_CP_MAX, 4), 0) * 10;
-            if (player_max == 0) return new byte[4];
-            int diff = net_max / player_max;
-            int ret = (check * diff) / 10;
+            int net_max = BitConverter.ToInt32(mem.ReadByte(NET_CP_MAX, 4), 0);
+            float diff = (float)net_max / player_max;
+            int ret = (int)(check * diff);
             return BitConverter.GetBytes(ret);
         }
 
