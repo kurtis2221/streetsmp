@@ -6,9 +6,10 @@ namespace streetsmp_serv
 {
     class Program
     {
-        const string TITLE = "Streets Racer Multiplayer 1.0 Alpha - Server";
+        const string TITLE = "Streets Racer Multiplayer 1.1 Alpha - Server";
         const short PORT = 7777;
         const int BUFFER_SIZE = 0x20;
+        const int MAX_PLAYERS = 4;
 
         static TcpListener serv;
         static byte slots, count;
@@ -23,7 +24,7 @@ namespace streetsmp_serv
             if (!byte.TryParse(Console.ReadLine(), out slots))
                 slots = 4;
             if (slots < 2) slots = 2;
-            else if (slots > 4) slots = 4;
+            else if (slots > MAX_PLAYERS) slots = 4;
             Console.Title = TITLE + " (0/" + slots + ")";
             Console.WriteLine("Server running");
             serv = new TcpListener(System.Net.IPAddress.Any, PORT);

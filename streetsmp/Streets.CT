@@ -4,7 +4,7 @@
     <CheatEntry>
       <ID>0</ID>
       <Description>"Ch"</Description>
-      <LastState Value="1056770788" RealAddress="004ABCA8"/>
+      <LastState Value="1031008621" RealAddress="004ABCA8"/>
       <VariableType>4 Bytes</VariableType>
       <Address>Streets.exe+ABCA8</Address>
     </CheatEntry>
@@ -77,14 +77,14 @@
     <CheatEntry>
       <ID>55</ID>
       <Description>"Y_3"</Description>
-      <LastState Value="-0.1196489111" RealAddress="004ABAE4"/>
+      <LastState Value="-0.04118629918" RealAddress="004ABAE4"/>
       <VariableType>Float</VariableType>
       <Address>Streets.exe+ABAE4</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>57</ID>
       <Description>"EU Ch"</Description>
-      <LastState Value="1" RealAddress="004AB300"/>
+      <LastState Value="2" RealAddress="004AB300"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>4 Bytes</VariableType>
       <Address>Streets.exe+AB300</Address>
@@ -92,14 +92,14 @@
     <CheatEntry>
       <ID>92</ID>
       <Description>"EU Ch max"</Description>
-      <LastState Value="12" RealAddress="004AB72C"/>
+      <LastState Value="27" RealAddress="004AB72C"/>
       <VariableType>4 Bytes</VariableType>
       <Address>Streets.exe+AB72C</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>58</ID>
       <Description>"EU Rot"</Description>
-      <LastState Value="6.194529533" RealAddress="004A80C4"/>
+      <LastState Value="1.538604259" RealAddress="004A80C4"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>Float</VariableType>
       <Address>Streets.exe+A8A6C-9a8</Address>
@@ -107,14 +107,14 @@
     <CheatEntry>
       <ID>61</ID>
       <Description>"EU X"</Description>
-      <LastState Value="76.57849121" RealAddress="004A81D4"/>
+      <LastState Value="133.857605" RealAddress="004A81D4"/>
       <VariableType>Float</VariableType>
       <Address>Streets.exe+A81D4</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>62</ID>
       <Description>"EU Y"</Description>
-      <LastState Value="111.7987671" RealAddress="004A81D8"/>
+      <LastState Value="179.9680023" RealAddress="004A81D8"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>Float</VariableType>
       <Address>Streets.exe+A81D8</Address>
@@ -129,7 +129,7 @@
     <CheatEntry>
       <ID>86</ID>
       <Description>"Ch_1 EU"</Description>
-      <LastState Value="2" RealAddress="004AB304"/>
+      <LastState Value="0" RealAddress="004AB304"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>4 Bytes</VariableType>
       <Address>Streets.exe+AB304</Address>
@@ -137,7 +137,7 @@
     <CheatEntry>
       <ID>91</ID>
       <Description>"Ch_1 max EU"</Description>
-      <LastState Value="91" RealAddress="004AB324"/>
+      <LastState Value="292" RealAddress="004AB324"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>4 Bytes</VariableType>
       <Address>004ab2f8+2c</Address>
@@ -145,21 +145,21 @@
     <CheatEntry>
       <ID>90</ID>
       <Description>"Rot_1 EU"</Description>
-      <LastState Value="7.019820213" RealAddress="004A9678"/>
+      <LastState Value="3.911044598" RealAddress="004A9678"/>
       <VariableType>Float</VariableType>
       <Address>Streets.exe+A9678</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>81</ID>
       <Description>"X_1 EU"</Description>
-      <LastState Value="54.20680618" RealAddress="004A9770"/>
+      <LastState Value="0" RealAddress="004A9770"/>
       <VariableType>Float</VariableType>
       <Address>Streets.exe+A9770</Address>
     </CheatEntry>
     <CheatEntry>
       <ID>69</ID>
       <Description>"Y_1 EU"</Description>
-      <LastState Value="82.70713806" RealAddress="004A9774"/>
+      <LastState Value="0" RealAddress="004A9774"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>Float</VariableType>
       <Address>Streets.exe+A9774</Address>
@@ -174,7 +174,7 @@
     <CheatEntry>
       <ID>70</ID>
       <Description>"X_2 EU"</Description>
-      <LastState Value="147.6265411" RealAddress="004AA454"/>
+      <LastState Value="0" RealAddress="004AA454"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>Float</VariableType>
       <Address>Streets.exe+A9770+CE4</Address>
@@ -182,7 +182,7 @@
     <CheatEntry>
       <ID>71</ID>
       <Description>"Y_2 EU"</Description>
-      <LastState Value="127.1889114" RealAddress="004AA458"/>
+      <LastState Value="0" RealAddress="004AA458"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>Float</VariableType>
       <Address>Streets.exe+A9774+CE4</Address>
@@ -190,7 +190,7 @@
     <CheatEntry>
       <ID>72</ID>
       <Description>"X_3 EU"</Description>
-      <LastState Value="56.41342545" RealAddress="004AB138"/>
+      <LastState Value="0" RealAddress="004AB138"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>Float</VariableType>
       <Address>Streets.exe+A9770+CE4+CE4</Address>
@@ -198,7 +198,7 @@
     <CheatEntry>
       <ID>73</ID>
       <Description>"Y_3 EU"</Description>
-      <LastState Value="81.29122925" RealAddress="004AB13C"/>
+      <LastState Value="0" RealAddress="004AB13C"/>
       <ShowAsSigned>0</ShowAsSigned>
       <VariableType>Float</VariableType>
       <Address>Streets.exe+A9774+CE4+CE4</Address>
@@ -505,6 +505,58 @@
         <Byte>56</Byte>
         <Byte>B9</Byte>
         <Byte>60</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>AI X Place</Description>
+      <AddressString>Streets.exe+19B88</AddressString>
+      <Before>
+        <Byte>86</Byte>
+        <Byte>30</Byte>
+        <Byte>0A</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>D9</Byte>
+        <Byte>96</Byte>
+        <Byte>28</Byte>
+        <Byte>0B</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>D9</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>10</Byte>
+        <Byte>D8</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry Color="80000008">
+      <Description>AI Y Place</Description>
+      <AddressString>Streets.exe+19B98</AddressString>
+      <Before>
+        <Byte>0D</Byte>
+        <Byte>84</Byte>
+        <Byte>32</Byte>
+        <Byte>47</Byte>
+        <Byte>00</Byte>
+      </Before>
+      <Actual>
+        <Byte>D9</Byte>
+        <Byte>96</Byte>
+        <Byte>2C</Byte>
+        <Byte>0B</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>D8</Byte>
+        <Byte>0D</Byte>
+        <Byte>F4</Byte>
+        <Byte>32</Byte>
+        <Byte>47</Byte>
       </After>
     </CodeEntry>
   </CheatCodes>

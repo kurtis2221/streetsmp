@@ -10,17 +10,25 @@ using System.Reflection;
 
 namespace streetsmp
 {
+    struct Vector3
+    {
+        public float X, Y, Z;
+    }
+
     class Form1 : Form
     {
-        public const string TITLE = "Streets Racer Multiplayer Client 1.0 Alpha";
+        public const string TITLE = "Streets Racer Multiplayer Client 1.1 Alpha";
         public const string GAME_EXE = "Streets.exe";
         const string FILE_IP = "streetsmp.txt";
         const int PORT = 7777;
         //Client send
         const int BUFFER_SEND_SIZE = 0x20;
         const int THD_SLEEP = 40; //25 FPS
+        const int THD_SLEEP_ALT = THD_SLEEP / 2; //50 FPS
         //Client recieve
         const int BUFFER_SIZE = BUFFER_SEND_SIZE + 1;
+        //Max players -1
+        const int MAX_PLAYERS = 3;
         //Player, network car
         static uint[] PLAYER_ADDR = 
         {
@@ -47,8 +55,8 @@ namespace streetsmp
         const uint PLAYER_CP_MAX = 0x004AB72C;
         const uint NET_CP_MAX = 0x004AB324;
         //AI
-        uint[] AI_ADDR = { 0x0041622B, 0x00416243, 0x0041625D };
-        byte[] ASM_NOP = { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 };
+        static uint[] AI_ADDR = { 0x0041622B, 0x00416243, 0x0041625D, 0x00419B88, 0x00419B98 };
+        static byte[] ASM_NOP = { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 };
         //Offset
         const uint CAR_OFFSET = 0xCE4;
         const uint CH_OFFSET = 0x4;
@@ -64,6 +72,8 @@ namespace streetsmp
         Thread thd, thd2;
         MemoryEdit.Memory mem;
         Process game;
+        Vector3[] player_coords = new Vector3[MAX_PLAYERS];
+        Vector3[] player_diff = new Vector3[MAX_PLAYERS];
 
         public Form1()
         {
@@ -123,6 +133,9 @@ namespace streetsmp
             mem.WriteByte(AI_ADDR[0], ASM_NOP, ASM_NOP.Length - 1);
             mem.WriteByte(AI_ADDR[1], ASM_NOP, ASM_NOP.Length);
             mem.WriteByte(AI_ADDR[2], ASM_NOP, ASM_NOP.Length);
+            //Placement X, Y
+            mem.WriteByte(AI_ADDR[3], ASM_NOP, 6);
+            mem.WriteByte(AI_ADDR[4], ASM_NOP, 6);
             //
             sock = client.Client;
             thd = new Thread(new ThreadStart(NetRec));
@@ -134,10 +147,41 @@ namespace streetsmp
         byte[] CalculateCheckpoint(int check)
         {
             int player_max = BitConverter.ToInt32(mem.ReadByte(PLAYER_CP_MAX, 4), 0);
-            int net_max = BitConverter.ToInt32(mem.ReadByte(NET_CP_MAX, 4), 0) - 1;
-            float diff = (float)check / player_max;
-            int ret = (int)(diff * net_max);
+            int net_max = BitConverter.ToInt32(mem.ReadByte(NET_CP_MAX, 4), 0) * 10;
+            if (player_max == 0) return new byte[4];
+            int diff = net_max / player_max;
+            int ret = (check * diff) / 10;
             return BitConverter.GetBytes(ret);
+        }
+
+        void CalculateBetweenDiff(byte id, Vector3 pos)
+        {
+            Vector3 old = player_coords[id];
+            pos.X = ((old.X + pos.X) / 2) - old.X;
+            pos.Y = ((old.Y + pos.Y) / 2) - old.Y;
+            pos.Z = ((old.Z + pos.Z) / 2) - old.Z;
+            player_diff[id] = pos;
+        }
+
+        void WriteMoveBetween(byte id)
+        {
+            Thread.Sleep(THD_SLEEP_ALT);
+            Vector3 newpos = player_coords[id];
+            Vector3 diff = player_diff[id];
+            newpos.X += diff.X;
+            newpos.Y += diff.Y;
+            newpos.Z += diff.Z;
+            byte[] buffer;
+            uint tmp;
+            tmp = NET_ADDR[2] + CAR_OFFSET * id;
+            buffer = BitConverter.GetBytes(newpos.Z);
+            mem.WriteByte(tmp, buffer, 4);
+            tmp = NET_ADDR[3] + CAR_OFFSET * id;
+            buffer = BitConverter.GetBytes(newpos.X);
+            mem.WriteByte(tmp, buffer, 4);
+            tmp += 0x4;
+            buffer = BitConverter.GetBytes(newpos.Y);
+            mem.WriteByte(tmp, buffer, 4);
         }
 
         void NetRec()
@@ -151,6 +195,8 @@ namespace streetsmp
                 uint tmp;
                 int src_idx;
                 int len;
+                Action<byte> task = WriteMoveBetween;
+                Vector3 pos = new Vector3();
                 while (true)
                 {
                     for (int idx = 0; idx < BUFFER_SIZE; idx += sock.Receive(buffer, idx, BUFFER_SIZE - idx, SocketFlags.None)) ;
@@ -171,6 +217,14 @@ namespace streetsmp
                         tmp = NET_ADDR[i] + CAR_OFFSET * id;
                         mem.WriteByte(tmp, data, len);
                     }
+                    //Difference calculation
+                    pos.Z = BitConverter.ToSingle(buffer, 0x11);
+                    pos.X = BitConverter.ToSingle(buffer, 0x15);
+                    pos.Y = BitConverter.ToSingle(buffer, 0x19);
+                    CalculateBetweenDiff(id, pos);
+                    player_coords[id] = pos;
+                    //Write difference between packets
+                    task.BeginInvoke(id, null, null);
                 }
             }
             catch (Exception e)
